@@ -14,4 +14,7 @@ public interface heroRepo extends JpaRepository<Heroes, Long> {
 	
 	@Query("from Heroes h where lower(h.name) like CONCAT('%',lower(:contains), '%')")
 	public Collection<Heroes> findByName(@Param("contains") String name);
+	
+	@Query("from Heroes h where h.id < 5")
+	public Collection<Heroes> selectByid();
 }

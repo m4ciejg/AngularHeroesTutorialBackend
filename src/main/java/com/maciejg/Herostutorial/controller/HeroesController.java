@@ -63,6 +63,11 @@ public class HeroesController {
 		return heroRepo.findByName(name);
 	}
 	
+	@GetMapping("/search/id")
+	public Collection<Heroes> findById(){
+		return heroRepo.selectByid();
+	}
+	
 	
 	@PostMapping("/heroes")
 	public Heroes createm(@Valid @RequestBody Heroes entity) {
@@ -88,8 +93,7 @@ public class HeroesController {
 	public ResponseEntity<?> delete(@PathVariable(value = "id") long id){
 		
 		Heroes entity = heroRepo.findById(id)
-								.orElseThrow(() -> new ResourceNotFoundException("EntityNote", "id", id));
-		
+								.orElseThrow(() -> new ResourceNotFoundException("EntityNote", "id", id));	
 		heroRepo.delete(entity);
 		
 		return ResponseEntity.ok().build();
